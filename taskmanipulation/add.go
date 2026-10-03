@@ -13,7 +13,7 @@ import (
 
 func Add(args []string, content []byte) {
 
-	if(len(args) != 3){
+	if len(args) != 3 {
 		fmt.Printf("Please Use: ./programm add 'Task Description'\n")
 		os.Exit(2)
 	}
@@ -24,7 +24,12 @@ func Add(args []string, content []byte) {
 
 	//fmt.Println(content)
 
-	if strings.Compare(string(content), "") != 0 {
+	//Clearing a empty Json
+	if strings.Compare(string(content), "[]") == 0{content = []byte{}}
+
+
+	//Doing stuff
+	if strings.Compare(string(content), "") != 0{
 		err := json.Unmarshal(content, &all_tasks)
 
 		if err != nil {

@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func WriteToJson(all_tasks []models.Task){
+func WriteToJson(all_tasks []models.Task) {
 	var bufferiono bytes.Buffer
 
 	ss, err := json.Marshal(all_tasks)

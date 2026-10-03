@@ -46,26 +46,14 @@ func main() {
 	case "update":
 		taskmanipulation.Update(os.Args, content)
 	case "delete":
-		delete(os.Args)
+		taskmanipulation.Delete(os.Args, content)
 	case "mark-in-progress":
-		markInProgress(os.Args)
+		taskmanipulation.ChangeProgress(os.Args, content, 1)
 	case "mark-done":
-		markDone(os.Args)
+		taskmanipulation.ChangeProgress(os.Args, content, 2)
 	case "list":
 		list(os.Args)
 	}
-}
-
-func delete(args []string) {
-	fmt.Printf("You called the %s function", args[1])
-}
-
-func markInProgress(args []string) {
-	fmt.Printf("You called the %s function", args[1])
-}
-
-func markDone(args []string) {
-	fmt.Printf("You called the %s function", args[1])
 }
 
 func list(args []string) {

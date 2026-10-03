@@ -13,34 +13,35 @@ import (
 
 func Update(args []string, content []byte) {
 
-	if(len(args) != 4){
-		fmt.Printf("Please use ./programm ID 'New Description'\n")
+	if len(args) != 4 {
+		fmt.Printf("Please use ./programm update ID 'New Description'\n")
 		os.Exit(2)
 	}
 
-	targetID, _ := strconv.Atoi(args[2])
+	targetID, err := strconv.Atoi(args[2])
+
+	if err != nil {
+		log.Fatalf("Use a number(ID) to update a given task")
+	}
 
 	var all_tasks = []models.Task{}
 
-	err := json.Unmarshal(content, &all_tasks)
+	err = json.Unmarshal(content, &all_tasks)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	//Checking for ID
-	found := false
-	for _, task := range all_tasks {
-		if task.ID == targetID {
-			found = true
-			break
-		}
+	_, err = basicoperations.SearchByID(all_tasks, targetID)
+
+	if err != nil {
+		log.Fatal(err)
 	}
-	if !found {log.Fatalf("ID not Found")}
-	
+
 	// Changing the Description
-	all_tasks[targetID - 1].Description = os.Args[3]
-	all_tasks[targetID - 1].UpdatedAt = time.Now().String()	
+	all_tasks[targetID-1].Description = os.Args[3]
+	all_tasks[targetID-1].UpdatedAt = time.Now().String()
 
 	// Writing to a Json File
 	basicoperations.WriteToJson(all_tasks)
