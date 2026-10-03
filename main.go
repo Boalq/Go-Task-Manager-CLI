@@ -25,7 +25,11 @@ func main() {
 	file, err := os.Open(models.Json_file)
 
 	if err != nil {
-		log.Fatalf("Make Sure that you have a tasks.json in the root directory \nCouldn't open the file %e", err)
+		file, err = os.Create("tasks.json")
+
+		if err != nil{
+			log.Fatalln("Couldn't either find or create the File 'tasks.json'")
+		}
 	}
 
 	defer file.Close()
@@ -35,10 +39,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Couldn't Read the file!")
 	}
-
-	// Learn basic JSON handling
-	// Learn How to read and write to files
-	// Look more on how to implement the list function!
 
 	switch os.Args[1] {
 	case "add":
@@ -52,10 +52,6 @@ func main() {
 	case "mark-done":
 		taskmanipulation.ChangeProgress(os.Args, content, 2)
 	case "list":
-		list(os.Args)
+		taskmanipulation.List(os.Args, content)
 	}
-}
-
-func list(args []string) {
-	fmt.Printf("You called the %s function", args[1])
 }

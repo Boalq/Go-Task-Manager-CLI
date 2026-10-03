@@ -40,4 +40,6 @@ func Delete(args []string, content []byte) {
 	all_tasks = slices.Delete(all_tasks, index, index + 1)
 
 	basicoperations.WriteToJson(all_tasks)
+
+	fmt.Printf("Deleted.\n")
 }

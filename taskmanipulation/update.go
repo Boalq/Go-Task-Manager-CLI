@@ -46,5 +46,5 @@ func Update(args []string, content []byte) {
 	// Writing to a Json File
 	basicoperations.WriteToJson(all_tasks)
 
-	fmt.Println("Sucessfully changed")
+	fmt.Printf("Sucessfully changed to %q", os.Args[3])
 }
