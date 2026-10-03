@@ -33,15 +33,15 @@ func Update(args []string, content []byte) {
 	}
 
 	//Checking for ID
-	_, err = basicoperations.SearchByID(all_tasks, targetID)
+	index, err := basicoperations.SearchByID(all_tasks, targetID)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Changing the Description
-	all_tasks[targetID-1].Description = os.Args[3]
-	all_tasks[targetID-1].UpdatedAt = time.Now().String()
+	all_tasks[index].Description = os.Args[3]
+	all_tasks[index].UpdatedAt = time.Now().String()
 
 	// Writing to a Json File
 	basicoperations.WriteToJson(all_tasks)
