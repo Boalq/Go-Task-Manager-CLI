@@ -1,31 +1,13 @@
 [
 	{
 		"ID": 1,
-		"ToDo": "Buymilk",
+		"ToDo": "Grab some milk",
 		"InProgress": false,
 		"Done": false
 	},
 	{
 		"ID": 2,
-		"ToDo": "To Swim",
-		"InProgress": false,
-		"Done": false
-	},
-	{
-		"ID": 3,
-		"ToDo": "Take a Bath",
-		"InProgress": false,
-		"Done": false
-	},
-	{
-		"ID": 4,
-		"ToDo": "Grab some milk",
-		"InProgress": false,
-		"Done": false
-	},
-	{
-		"ID": 5,
-		"ToDo": "Grab some milk",
+		"ToDo": "Going on a Date",
 		"InProgress": false,
 		"Done": false
 	}

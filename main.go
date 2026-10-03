@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -20,13 +21,29 @@ func main() {
 		return
 	}
 
+	
+	// Handling the tasks.json
+	file, err := os.Open(json_file)
+
+	if err != nil {
+		log.Fatalf("Make Sure that you have a tasks.json in the root directory \nCouldn't open the file %e", err)
+	}
+
+	defer file.Close()
+
+	//Getting the File Content 
+	content, err := os.ReadFile(json_file)
+	if err != nil {
+		log.Fatal("Couldn't Read the file!")
+	}
+
 	// Learn basic JSON handling
 	// Learn How to read and write to files
 	// Look more on how to implement the list function!
 
 	switch os.Args[1] {
 	case "add":
-		add(os.Args)
+		add(os.Args, content)
 	case "update":
 		update(os.Args)
 	case "delete":
