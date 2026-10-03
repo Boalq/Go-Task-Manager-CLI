@@ -1,6 +1,7 @@
-package main
+package taskmanipulation
 
 import (
+	"Task-Tracker/models"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -9,9 +10,9 @@ import (
 	"strings"
 )
 
-func add(args []string, content []byte) {
+func Add(args []string, content []byte) {
 
-	var all_tasks []Task
+	var all_tasks []models.Task
 
 	var IDs int
 
@@ -31,7 +32,7 @@ func add(args []string, content []byte) {
 
 	// fmt.Println(IDs)
 
-	all_tasks = append(all_tasks, Task{ID: IDs + 1, Todo: args[2], InProgress: false, Done: false})
+	all_tasks = append(all_tasks, models.Task{ID: IDs + 1, Todo: args[2], InProgress: false, Done: false})
 
 	var bufferiono bytes.Buffer
 
@@ -47,7 +48,7 @@ func add(args []string, content []byte) {
 		log.Fatal(err)
 	}
 
-	err = os.WriteFile(json_file, bufferiono.Bytes(), 0x2)
+	err = os.WriteFile(models.Json_file, bufferiono.Bytes(), 0x2)
 
 	if err != nil {
 		log.Fatal(err)

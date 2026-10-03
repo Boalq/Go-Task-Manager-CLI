@@ -1,12 +1,12 @@
 package main
 
 import (
+	"Task-Tracker/models"
+	taskmanipulation "Task-Tracker/task_manipulation"
 	"fmt"
 	"log"
 	"os"
 )
-
-const json_file = "tasks.json"
 
 type Task struct {
 	ID         int    `json:"ID"`
@@ -21,9 +21,8 @@ func main() {
 		return
 	}
 
-	
 	// Handling the tasks.json
-	file, err := os.Open(json_file)
+	file, err := os.Open(models.Json_file)
 
 	if err != nil {
 		log.Fatalf("Make Sure that you have a tasks.json in the root directory \nCouldn't open the file %e", err)
@@ -31,8 +30,8 @@ func main() {
 
 	defer file.Close()
 
-	//Getting the File Content 
-	content, err := os.ReadFile(json_file)
+	//Getting the File Content
+	content, err := os.ReadFile(models.Json_file)
 	if err != nil {
 		log.Fatal("Couldn't Read the file!")
 	}
@@ -43,7 +42,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "add":
-		add(os.Args, content)
+		taskmanipulation.Add(os.Args, content)
 	case "update":
 		update(os.Args)
 	case "delete":
