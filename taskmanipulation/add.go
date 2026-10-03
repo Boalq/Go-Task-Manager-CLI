@@ -1,16 +1,22 @@
 package taskmanipulation
 
 import (
+	"Task-Tracker/basicoperations"
 	"Task-Tracker/models"
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 func Add(args []string, content []byte) {
+
+	if(len(args) != 3){
+		fmt.Printf("Please Use: ./programm add 'Task Description'\n")
+		os.Exit(2)
+	}
 
 	var all_tasks []models.Task
 
@@ -32,27 +38,15 @@ func Add(args []string, content []byte) {
 
 	// fmt.Println(IDs)
 
-	all_tasks = append(all_tasks, models.Task{ID: IDs + 1, Todo: args[2], InProgress: false, Done: false})
+	all_tasks = append(all_tasks, models.Task{
+		ID:          IDs + 1,
+		Description: args[2],
+		Status:      models.StatusComponent{ToDo: true, InProgress: false, Done: false},
+		CreatedAt:   time.Now().String(),
+		UpdatedAt:   "",
+	})
 
-	var bufferiono bytes.Buffer
-
-	ss, err := json.Marshal(all_tasks)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = json.Indent(&bufferiono, ss, "", "\t")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = os.WriteFile(models.Json_file, bufferiono.Bytes(), 0x2)
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	basicoperations.WriteToJson(all_tasks)
 
 	fmt.Printf("Task Added Successfully ID: %d", IDs+1)
 }

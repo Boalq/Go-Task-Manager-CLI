@@ -2,7 +2,7 @@ package main
 
 import (
 	"Task-Tracker/models"
-	taskmanipulation "Task-Tracker/task_manipulation"
+	"Task-Tracker/taskmanipulation"
 	"fmt"
 	"log"
 	"os"
@@ -44,7 +44,7 @@ func main() {
 	case "add":
 		taskmanipulation.Add(os.Args, content)
 	case "update":
-		update(os.Args)
+		taskmanipulation.Update(os.Args, content)
 	case "delete":
 		delete(os.Args)
 	case "mark-in-progress":
@@ -54,10 +54,6 @@ func main() {
 	case "list":
 		list(os.Args)
 	}
-}
-
-func update(args []string) {
-	fmt.Printf("You called the %s function", args[1])
 }
 
 func delete(args []string) {
